@@ -1,0 +1,6 @@
+Name: Nouman
+Role: Software Engineer
+Experience: Backend development, AI systems, Clean Architecture, FastAPI.
+Skills: Python, REST APIs, SQLAlchemy, PostgreSQL, SQLite, Docker, unit testing with Pytest.
+Learning Interests: AI/ML, LLMs, RAG pipelines, embeddings, vector search (FAISS), and generative AI applications.
+Hobbies: Learning new tech, building side projects, exploring AI tools.

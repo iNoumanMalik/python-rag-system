@@ -1,0 +1,18 @@
+Project 1: Task Management System
+- Built using FastAPI and Python.
+- Features: Create, read, update, delete tasks.
+- Implemented unit tests with Pytest.
+- Integrated with SQLite and PostgreSQL.
+- Currently adding Docker support for deployment.
+
+Project 2: RAG Prototype
+- Built a small Retrieval-Augmented Generation system.
+- Uses OpenAI embeddings and LLM API.
+- Stores vectors in FAISS for similarity search.
+- Features chunking, top-K retrieval, prompt construction, and answer generation.
+- Optional FastAPI endpoint for querying.
+
+Project 3: AI Experiments
+- Exploring embeddings, vector databases, and fine-tuning.
+- Using OpenAI API to generate contextual answers.
+- Testing token-based chunking and similarity scoring.
