@@ -3,12 +3,12 @@ import faiss
 import numpy as np
 from google import genai
 
-EMBED_MODEL = "models/gemini-embedding-001"  # Correct embedding model for Google GenAI
-GEN_MODEL = "gemini-2.5-flash-lite"  # Using experimental flash model
+EMBED_MODEL = "models/gemini-embedding-001" 
+GEN_MODEL = "gemini-2.5-flash-lite"  
 CHUNK_SIZE = 500
 TOP_K = 2
 
-# Initialize the client with your API key
+
 client = genai.Client(
     api_key="AIzaSyDA0wyTy1k_ES1HoAAul2D4VaMDOEmoG8M"
 ) 
@@ -37,9 +37,9 @@ def chunk_text(text, chunk_size=CHUNK_SIZE):
 def get_embedding(text):
     try:
         result = client.models.embed_content(
-            model=EMBED_MODEL, contents=text  # Using correct model name
+            model=EMBED_MODEL, contents=text 
         )
-        # The embedding might be in different formats depending on the API version
+  
         if hasattr(result, "embeddings") and result.embeddings:
             if hasattr(result.embeddings[0], "values"):
                 return np.array(result.embeddings[0].values, dtype="float32")
@@ -48,8 +48,7 @@ def get_embedding(text):
         return np.array(result.embeddings[0], dtype="float32")
     except Exception as e:
         print(f"Error getting embedding: {e}")
-        # Return a zero vector as fallback (not ideal but prevents crashing)
-        return np.zeros(768, dtype="float32")  # embedding-001 outputs 768 dimensions
+        return np.zeros(768, dtype="float32")  
 
 
 def build_index(documents):
@@ -83,7 +82,7 @@ def retrieve(query, index, metadata, top_k=TOP_K):
     results = []
 
     for score, idx in zip(distances[0], indices[0]):
-        if idx < len(metadata):  # Make sure index is valid
+        if idx < len(metadata):  
             results.append({"score": float(score), "metadata": metadata[idx]})
 
     return results
@@ -96,7 +95,7 @@ def generate_answer(query, retrieved_chunks):
     context = "\n\n".join([chunk["metadata"]["text"] for chunk in retrieved_chunks])
 
     try:
-        # Correct way to generate content with Gemini
+      
         response = client.models.generate_content(
             model=GEN_MODEL,
             contents=f"Context:\n{context}\n\nQuestion:\n{query}\n\nPlease answer the question based on the context provided.",
@@ -109,7 +108,7 @@ def generate_answer(query, retrieved_chunks):
 if __name__ == "__main__":
     print("Building index...")
 
-    # Check if documents folder exists
+
     if not os.path.exists("documents"):
         os.makedirs("documents")
         print("Created 'documents' folder. Please add your .txt files there.")
