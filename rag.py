@@ -3,10 +3,10 @@ import faiss
 import numpy as np
 from google import genai
 
-EMBED_MODEL = "models/gemini-embedding-001" 
-GEN_MODEL = "gemini-2.5-flash-lite"  
-CHUNK_SIZE = 500
-TOP_K = 2
+EMBED_MODEL = "models/gemini-embedding-001"  #  It converts text chunks or queries into vector embeddings.
+GEN_MODEL = "gemini-2.5-flash-lite"  # generate answers based on the retrieved chunks
+CHUNK_SIZE = 500  # How many characters per text chunk split
+TOP_K = 2  # How many most similar chunks
 
 
 client = genai.Client(
